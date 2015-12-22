@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="180 Project!">
+    <meta name="author" content="Kabir Shah">
+    <link rel="shortcut icon" type="image/png" href="/favicon.jpg"/>
+<link rel="shortcut icon" type="image/png" href="https://0cf7i5xv.apps.lair.io/favicon.png"/>
+  <title>Stars!</title>
+    <link rel="stylesheet" type="text/css" href="main.scss">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<style>
+    </style>
+  <div id="wrap">
+  <p>move the cursor around</p>
+</div>
+  <script>
+  	$(document).ready(function(){
+  
+  var mousePos = {};
+
+ function getRandomInt(min, max) {
+   return Math.round(Math.random() * (max - min + 1)) + min;
+ }
+  
+  $(window).mousemove(function(e) {
+    mousePos.x = e.pageX;
+    mousePos.y = e.pageY;
+  });
+  
+  $(window).mouseleave(function(e) {
+    mousePos.x = -1;
+    mousePos.y = -1;
+  });
+  
+  var draw = setInterval(function(){
+    if(mousePos.x > 0 && mousePos.y > 0){
+      
+      var range = 15;
+      
+      var color = "background: rgb("+getRandomInt(0,255)+","+getRandomInt(0,255)+","+getRandomInt(0,255)+");";
+      
+      var sizeInt = getRandomInt(10, 30);
+      size = "height: " + sizeInt + "px; width: " + sizeInt + "px;";
+      
+      var left = "left: " + getRandomInt(mousePos.x-range-sizeInt, mousePos.x+range) + "px;";
+      
+      var top = "top: " + getRandomInt(mousePos.y-range-sizeInt, mousePos.y+range) + "px;"; 
+
+      var style = left+top+color+size;
+      $("<div class='ball' style='" + style + "'></div>").appendTo('#wrap').one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function(){$(this).remove();}); 
+    }
+  }, 1);
+});
+
+  </script>
+</body>
+</html>
